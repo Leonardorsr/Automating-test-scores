@@ -53,6 +53,7 @@ infoExame.append(médiasE)
 print('CÁLCULO EXAME')
 nn=0
 for aluno in infoExame[0]:
+    nn+=1
     notaE = float(input(f'Nota do Exame do {aluno}: '))
     média = (infoExame[1][-1+nn] + notaE)/2
     if média >=5.0: 
@@ -69,4 +70,4 @@ print('RESUMO')
 print(f'{str(aprovadosD)[1:-1]} foi/foram aprovados direto com,{str(médiasAD)[1:-1]} de média respectivamente')
 print(f'{str(aprovadosE)[1:-1]} foi/foram aprovados depois do exame com, {str(médiasAE)[1:-1]} de média respectivamente')
 print(f'{str(reprovados)[1:-1]} foi/foram reprovados com, {str(médiasR)[1:-1]} de média respectivamente')
-print('Dos,',len(alunos),'alunos ', int(len(aprovadosD))/int(len(alunos))*100,'% passaram direto, ',int(len(aprovadosE))/int(len(alunos))*100,'% passaram com a ajuda do exame e ',int(len(reprovados))/int(len(alunos))*100,'%, reprovaram')
+print('Dos,',len(alunos),'alunos ', round(int(len(aprovadosD))/int(len(alunos))*100,1),'% passaram direto, ', round(int(len(aprovadosE))/int(len(alunos))*100,1),'% passaram com a ajuda do exame e ', round(int(len(reprovados))/int(len(alunos))*100),1,'%, reprovaram')
