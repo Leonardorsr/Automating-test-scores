@@ -1,7 +1,9 @@
 #STATUS
 #Conversão para dict completa.
-#Inclusão de Pandas e JSON - 30%
+#Inclusão do JSON - 40%
+#Inclusão do Pandas-60%
 
+import pandas as pd
 alunos = []
 datahandle= {}
 alunose= []
@@ -22,73 +24,81 @@ while True:
         break
     else:
         datahandle["Nome"]=stop
+        datahandle["NP1"]=0
+        datahandle["NP2"]=0
+        datahandle["Exame"]="Nulo"
+        datahandle["NPE"]=0
         datahandle["Média"]=0
         datahandle["Situação"]="Nulo"
         alunos.append(datahandle.copy())
-        print(alunos)
 print('CÁLCULO NP1 E NP2')
 for i in alunos:
     total=0
     média=0
     n = 0
     print(f'Coloque as notas do {i["Nome"]}:')
-    while n <2:
-        nota = 0
-        n = n +1
-        try:
-            nota = float(input())
-            if nota>10 or nota <0:
-                print('Nota inválida, coloque as 2 notas denovo')
-                n=0
-                continue
-        except:
-            print('Nota inválida, coloque as 2 notas denovo')
-            n=0
-            continue  
-        total = total + nota
-    média = total/2
+    nota1 = 0
+    nota2 = 0
+    nota1 = float(input())
+    nota2 = float(input())
+    média = (nota1+nota2)/2
     if média >=7.0:
-        datahandle['Situação']='APROVADO'
-        datahandle['Média']=média
-        datahandle['Nome']=i["Nome"]
+        datahandle["Situação"]="APROVADO"
+        datahandle["Média"]=média
+        datahandle["Nome"]=i["Nome"]
+        datahandle["Exame"]="NÃO"
+        datahandle["NP1"]=nota1
+        datahandle["NP2"]=nota2
         alunosap.append(datahandle.copy())
-        print(f'{datahandle["Nome"]},{datahandle["Média"]}, APROVADO')
+        #print(f'{datahandle["Nome"]},{datahandle["Média"]}, APROVADO')
     else:
-        datahandle['Situação']='EXAME'
-        datahandle['Média']=média
-        datahandle['Nome']=i["Nome"]
+        datahandle["Situação"]="Nulo"
+        datahandle["Média"]=média
+        datahandle["Nome"]=i["Nome"]
+        datahandle["Exame"]="SIM"
+        datahandle["NP1"]=nota1
+        datahandle["NP2"]=nota2
         alunose.append(datahandle.copy())
         médiase.append(média)
-        print(f'{datahandle["Nome"]},{datahandle["Média"]}, EXAME')
+        #print(f'{datahandle["Nome"]},{datahandle["Média"]}, EXAME')
 print('CÁLCULO EXAME')
 nn=-1
 for i in alunose:
     nn+=1
-    notaE = float(input(f'Nota do Exame do {i["Nome"]}: '))
-    média = (médiase[nn] + notaE)/2
+    notae = float(input(f'Nota do Exame do {i["Nome"]}: '))
+    média = (médiase[nn] + notae)/2
     if média >=5.0:
         datahandle["Situação"]="APROVADO"
         datahandle["Média"]=média
+        datahandle["NPE"]=notae
+        datahandle["NP1"]=i["NP1"]
+        datahandle["NP2"]=i["NP2"]
         datahandle["Nome"]=i["Nome"]
+        datahandle["Exame"]="SIM"
         alunosap.append(datahandle.copy())
         #print(f'{datahandle["Nome"]},{datahandle["Média"]}, {datahandle["Situação"]}')
     else:
         datahandle["Situação"]="REPROVADO"
         datahandle["Média"]=média
+        datahandle["NPE"]=notae
+        datahandle["NP1"]=i["NP1"]
+        datahandle["NP2"]=i["NP2"]
         datahandle["Nome"]=i["Nome"]
+        datahandle["Exame"]="SIM"
         alunosrep.append(datahandle.copy())
         #print(f'{datahandle["Nome"]},{datahandle["Média"]}, {datahandle["Situação"]}')          
-#print(alunosap)
-#print()
-#print(alunosrep[0])
-
+tabelaap= pd.DataFrame(alunosap)
+tabelarep=pd.DataFrame(alunosrep)
+tabela_df=pd.concat([tabelaap,tabelarep], ignore_index=True)
+print(tabela_df)
+tabela_df.to_excel('tabela_teste.xlsx')
 print('RESUMO')
 print()
 print('Foram APROVADOS')
 for i in alunosap:
-    print(f'Nome: {i["Nome"]} Média: {i["Média"]}')
+    print(f'Nome: {i["Nome"]}, Média: {i["Média"]}')
 print()
-print('Foram APROVADOS')
+print('Foram REPROVADO')
 for i in alunosrep:
-    print(f'Nome: {i["Nome"]} Média: {i["Média"]}')
-print('Dos,',len(alunos),'alunos ', round(int(len(alunosap))/int(len(alunos))*100,1),'% passaram direto, e,', round(int(len(alunosrep))/int(len(alunos))*100),'%, reprovaram')
+    print(f'Nome: {i["Nome"]}, Média: {i["Média"]}')
+print('Dos,',len(alunos),'alunos ', round(int(len(alunosap))/int(len(alunos))*100),'% passaram e',round(int(len(alunosrep))/int(len(alunos))*100),'%, reprovaram')
