@@ -11,7 +11,7 @@ alunosap= []
 alunosrep= []
 médiase=[]
 nomes=[]
-arquivo='informações.xlsx'
+arquivo='info.xlsx'
 r1=int(input('A tabela excel será atualizada ou criada? (0 ou 1 respectivamente) '))
 
 def dhi(nome):
