@@ -58,7 +58,7 @@ if r1==0:
     print(nomes)
     for nome in nomes:          
         dhi(nome)
-    print(alunos)
+    #print(alunos)
 r2=input('Algum novo aluno será adicionado? (s ou n repectivamente) ')
 if r2=='s' or r1==1: 
     print('Digite o nome dos alunos. (Quando terminar digite "done")')
@@ -68,7 +68,7 @@ if r2=='s' or r1==1:
             break
         else:
             dhi(nome)
-    print(alunos)
+    #print(alunos)
     
 print('CÁLCULO NP1 E NP2')
 for i in alunos:
@@ -101,7 +101,7 @@ for i in alunose:
         #print(f'{datahandle["Nome"]},{datahandle["Média"]}, {datahandle["Situação"]}')
         
                 
-tabelaap= pd.DataFrame(alunosap)
+tabelaap=pd.DataFrame(alunosap)
 tabelarep=pd.DataFrame(alunosrep)
 tabela_df=pd.concat([tabelaap,tabelarep], ignore_index=True)
 print(tabela_df)
