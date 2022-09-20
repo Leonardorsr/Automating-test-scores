@@ -1,8 +1,9 @@
 #STATUS
 #Conversão para dict-Completo.
-#Inclusão do JSON - 40%
+#Inclusão do JSON - 70%
 #Inclusão do Pandas-Completo
 
+import json
 import pandas as pd
 alunos = []
 datahandle= {}
@@ -12,8 +13,10 @@ alunosrep= []
 médiase=[]
 nomes=[]
 arquivo='info.xlsx'
-r1=int(input('A tabela excel será atualizada ou criada? (0 ou 1 respectivamente) '))
+classe={}
+r1=input('Qual classe sera atualizada/criada? ')
 
+r2=int(input('A tabela excel será atualizada ou criada? (0 ou 1 respectivamente) '))
 def dhi(nome):
     datahandle["Nome"]=nome
     datahandle["NP1"]=0
@@ -23,19 +26,19 @@ def dhi(nome):
     datahandle["Média"]=0
     datahandle["Situação"]="Nulo"
     alunos.append(datahandle.copy())
-def dhap(média,nota1,nota2,i,r3):
+def dhap(média,nota1,nota2,i,r4):
     datahandle["Situação"]="APROVADO"
     datahandle["Média"]=média
     datahandle["Nome"]=i["Nome"]
-    datahandle["Exame"]=r3
+    datahandle["Exame"]=r4
     datahandle["NP1"]=nota1
     datahandle["NP2"]=nota2
     alunosap.append(datahandle.copy())
-def dhe(média,nota1,nota2,i,r3):
+def dhe(média,nota1,nota2,i,r4):
     datahandle["Situação"]="Nulo"
     datahandle["Média"]=média
     datahandle["Nome"]=i["Nome"]
-    datahandle["Exame"]=r3
+    datahandle["Exame"]=r4
     datahandle["NP1"]=nota1
     datahandle["NP2"]=nota2
     alunose.append(datahandle.copy())
@@ -49,8 +52,8 @@ def dhrep(média,notae,i):
     datahandle["Nome"]=i["Nome"]
     datahandle["Exame"]="SIM"
     alunosrep.append(datahandle.copy())
-      
-if r1==0:
+    
+if r2==0:
     arquivo=input('Digite o nome do arquivo. (Não esqueça do sufixo, ".xlsx") ')
     tabela_df=pd.read_excel(arquivo)
     for i in tabela_df["Nome"]:
@@ -59,8 +62,8 @@ if r1==0:
     for nome in nomes:          
         dhi(nome)
     #print(alunos)
-r2=input('Algum novo aluno será adicionado? (s ou n repectivamente) ')
-if r2=='s' or r1==1: 
+r3=input('Algum novo aluno será adicionado? (s ou n repectivamente) ')
+if r3=='s' or r2==1: 
     print('Digite o nome dos alunos. (Quando terminar digite "done")')
     while True:
         nome = input()
@@ -80,12 +83,12 @@ for i in alunos:
     nota2 = float(input())
     média = (nota1+nota2)/2
     if média >=7.0:
-        r3="NÃO"
-        dhap(média,nota1,nota2,i,r3)
+        r4="NÃO"
+        dhap(média,nota1,nota2,i,r4)
         #print(f'{datahandle["Nome"]},{datahandle["Média"]}, APROVADO')
     else:
-        r3="SIM"
-        dhe(média,nota1,nota2,i,r3)
+        r4="SIM"
+        dhe(média,nota1,nota2,i,r4)
         #print(f'{datahandle["Nome"]},{datahandle["Média"]}, EXAME')
 print('CÁLCULO EXAME')
 nn=-1
@@ -113,9 +116,9 @@ tabelarep=pd.DataFrame(alunosrep)
 tabela_df=pd.concat([tabelaap,tabelarep], ignore_index=True)
 print(tabela_df)
 tabela_df.to_excel(arquivo)
-
-
-
+classe[r1]=alunosap,alunosrep
+api=json.dumps(classe)
+print(api)
 
 print('RESUMO')
 print()
