@@ -94,7 +94,14 @@ for i in alunose:
     notae = float(input(f'Nota do Exame do {i["Nome"]}: '))
     média = (médiase[nn] + notae)/2
     if média >=5.0:
-        dhap(média,nota1,nota2,i,notae,r3)
+        datahandle["Situação"]="APROVADO"
+        datahandle["Média"]=média
+        datahandle["NPE"]=notae
+        datahandle["NP1"]=i["NP1"]
+        datahandle["NP2"]=i["NP2"]
+        datahandle["Nome"]=i["Nome"]
+        datahandle["Exame"]="SIM"
+        alunosap.append(datahandle.copy())
         #print(f'{datahandle["Nome"]},{datahandle["Média"]}, {datahandle["Situação"]}')
     else:
         dhrep(média,notae,i)
@@ -116,7 +123,7 @@ print('Foram APROVADOS')
 for i in alunosap:
     print(f'Nome: {i["Nome"]}, Média: {i["Média"]}')
 print()
-print('Foram REPROVADO')
+print('Foram REPROVADOS')
 for i in alunosrep:
     print(f'Nome: {i["Nome"]}, Média: {i["Média"]}')
 print('Dos,',len(alunos),'alunos ', round(int(len(alunosap))/int(len(alunos))*100),'% passaram e',round(int(len(alunosrep))/int(len(alunos))*100),'%, reprovaram')
