@@ -14,8 +14,6 @@ alunose= []
 alunosap= []
 alunosrep= []
 médiase=[]
-nomes=[]
-arquivo='info.xlsx'
 classe={} 
 c=0
 #FIM- Imports e variáveis declaradas
