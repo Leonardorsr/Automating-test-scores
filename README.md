@@ -5,6 +5,6 @@
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-(Pandas-JSON.py) This code does everything that "Code.py" does, however it puts everything in a spreadsheet and is JSON compatible for possible changes and data sharing. (Status-INCOMPLETE)
+(Pandas-JSON.py) This code does everything that "Code.py" does, however it puts everything in a spreadsheet and is JSON compatible for possible changes and data sharing. (Status-Complete)
 
-(Pandas-JSON.py)Este código faz tudo oque o "Code.py" faz, porém este coloca tudo em uma planilha e é compatível com JSON para possíveis alterações e compartilhamento de dados.(Status-INCOMPLETO)
+(Pandas-JSON.py)Este código faz tudo oque o "Code.py" faz, porém este coloca tudo em uma planilha e é compatível com JSON para possíveis alterações e compartilhamento de dados.(Status-Completo)
